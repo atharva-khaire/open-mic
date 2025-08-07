@@ -66,8 +66,9 @@ app.use(cookieParser());
 app.use(
   cors({
     // origin: "http://localhost:5173",
-    origin: "https://wechat-frontend.onrender.com"
-    credentials: true,
+    // origin: "https://wechat-frontend.onrender.com",
+    origin: process.env.FRONTEND_URL,
+    credentials: true
   })
 );
 
