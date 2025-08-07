@@ -1,4 +1,4 @@
-[![Fork Button](https://img.shields.io/github/forks/iemafzalhassan/full-stack_chatApp?style=social)](https://github.com/iemafzalhassan/full-stack_chatApp/fork)
+[![Fork Button](https://github.com/atharva-khaire/WeChat-FullStack-chatApplication.gitl)]
 
 
 # Real-Time Chat Application
@@ -73,7 +73,7 @@ PORT=5001
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/iemafzalhassan/full-stack_chatApp.git
+git clone https://github.com/atharva-khaire/WeChat-FullStack-chatApplication.git
 ```
 
 🏗️ Build and Run the Application
@@ -101,7 +101,7 @@ http://localhost
 Follow these simple steps to get the project up and running on your local Host using docker.
 
 ```bash
-git clone https://github.com/iemafzalhassan/full-stack_chatApp.git
+git clone https://github.com/atharva-khaire/WeChat-FullStack-chatApplication.git
 ```
 
 ```bash
