@@ -6,6 +6,7 @@ const app = express();
 const server = http.createServer(app);
 
 const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
+// const frontendURL = "https://wechat-frontend.onrender.com"
 
 const io = new Server(server, {
   cors: {
