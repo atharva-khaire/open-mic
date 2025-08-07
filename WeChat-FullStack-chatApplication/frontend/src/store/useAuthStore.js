@@ -8,7 +8,7 @@ import { io } from "socket.io-client";
 
 const BASE_URL = import.meta.env.MODE === "development"
   ? "http://localhost:5001"
-  : "https://wechat-backend.onrender.com"; // Replace with your actual backend render URL
+  : "https://wechat-fullstack-chatapplication.onrender.com"; // Replace with your actual backend render URL
 
 
 
