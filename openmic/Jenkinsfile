@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/atharva-khaire/WeChat-FullStack-chatApplication.git'
+                    url: 'https://github.com/atharva-khaire/open-mic.git'
             }
         }
 
