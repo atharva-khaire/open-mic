@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: atharvakhairedev/wechat-frontend:latest
+    image: atharvakhairedev/openmic-frontend:latest
     ports:
       - "8080:80"
     depends_on:
@@ -13,7 +13,7 @@ services:
       - BACKEND_URL=http://backend:5001
 
   backend:
-    image: atharvakhairedev/wechat-backend:latest
+    image: atharvakhairedev/openmic-backend:latest
     ports:
       - "5001:5001"
     depends_on:
