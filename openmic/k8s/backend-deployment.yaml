@@ -21,8 +21,8 @@ spec:
         - containerPort: 5001
         env:
         - name: MONGODB_URI
-          # value: "mongodb://root:admin@mongodb:27017/chatApp?authSource=admin"
-          value: "mongodb+srv://atharvakhaire2004:6pjoq4q8FI2mvymi@cluster0.nv9nd2x.mongodb.net/"
+          value: "mongodb://root:admin@mongodb:27017/chatApp?authSource=admin"
+          # value: 
         - name: PORT
           value: "5001"
         - name: NODE_ENV
