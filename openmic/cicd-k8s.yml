@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials') 
+        DOCKER_FRONTEND_IMAGE = "atharvakhairedev/frontend"
+        DOCKER_BACKEND_IMAGE = "atharvakhairedev/backend"
+        KUBECONFIG_CREDENTIALS = credentials('kube-config') // Jenkins me add karna hoga
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/<your-username>/openmic.git'
+            }
+        }
+
+        stage('Build Frontend Image') {
+            steps {
+                sh """
+                  cd frontend
+                  docker build -t ${DOCKER_FRONTEND_IMAGE}:${BUILD_NUMBER} .
+                """
+            }
+        }
+
+        stage('Build Backend Image') {
+            steps {
+                sh """
+                  cd backend
+                  docker build -t ${DOCKER_BACKEND_IMAGE}:${BUILD_NUMBER} .
+                """
+            }
+        }
+
+        stage('Push Images to DockerHub') {
+            steps {
+                sh """
+                  echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin
+                  docker push ${DOCKER_FRONTEND_IMAGE}:${BUILD_NUMBER}
+                  docker push ${DOCKER_BACKEND_IMAGE}:${BUILD_NUMBER}
+                """
+            }
+        }
+
+        stage('Update K8s Manifests') {
+            steps {
+                sh """
+                  sed -i 's|atharvakhairedev/frontend:.*|${DOCKER_FRONTEND_IMAGE}:${BUILD_NUMBER}|g' k8s/frontend-deployment.yaml
+                  sed -i 's|atharvakhairedev/backend:.*|${DOCKER_BACKEND_IMAGE}:${BUILD_NUMBER}|g' k8s/backend-deployment.yaml
+                """
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                withKubeConfig([credentialsId: 'kube-config']) {
+                    sh """
+                      kubectl apply -f k8s/frontend-deployment.yaml
+                      kubectl apply -f k8s/backend-deployment.yaml
+                      kubectl apply -f k8s/frontend-service.yaml
+                      kubectl apply -f k8s/backend-service.yaml
+                    """
+                }
+            }
+        }
+    }
+}
