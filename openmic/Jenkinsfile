@@ -25,6 +25,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker-compose up -d --build'
+                    // or you can use if kubernetes was there sh 'sh cicd-k8s.yml'
                 }
             }
         }
